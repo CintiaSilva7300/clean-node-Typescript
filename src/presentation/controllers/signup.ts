@@ -12,8 +12,6 @@ export class SignUpController implements Controller{
                 return badRequest(new MissingParamError(field))
             }
         }
-
         return badRequest(new MissingParamError('name'))
-
     }
 }
