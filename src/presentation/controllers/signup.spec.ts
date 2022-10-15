@@ -17,14 +17,7 @@ const makeEmailValidator = (): EmailValidator => {
     }
     return new EmailValidatorStub()
 }
-const makeEmailValidatorWithError = (): EmailValidator => {
-    class EmailValidatorStub implements EmailValidator {
-        isValid(email: string): boolean {
-            throw new Error()
-        }
-    }
-    return new EmailValidatorStub()
-}
+
 const makeSut = (): SutTypes => {
 
     const emailValidatorStub = makeEmailValidator();
@@ -109,7 +102,7 @@ describe('Signup Controller', () => {
        expect (httpResponse.body).toEqual(new InvalidParamError('email'))
     })
 
-    test('Should call EmailValidator with corret email', () => {
+    test('Should call EmailValidator with correct email', () => {
         const { sut, emailValidatorStub } = makeSut()
        const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
         const httpRequest = {
@@ -125,9 +118,10 @@ describe('Signup Controller', () => {
     })
 
     test('Should return 500 if EmailValidator thorows', () => {
-        
-        const emailValidatorStub = makeEmailValidatorWithError()
-        const sut = new SignUpController(emailValidatorStub)
+        const { sut, emailValidatorStub } = makeSut()
+        jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(()=> {
+            throw new Error()
+        })
         const httpRequest = {
             body: {
                 name: 'cintia',
@@ -141,18 +135,5 @@ describe('Signup Controller', () => {
        expect (httpResponse.body).toEqual(new ServerError())
     })
 
-    test('Should call emailValidatorStub with correct email', () => {
-        const { sut, emailValidatorStub } = makeSut()
-        const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
-        const httpRequest = {
-            body: {
-                name: 'cintia',
-                email: 'any_email@gmail.com',
-                password:'123',
-                passwordConfirmation: '123',
-            }
-        }
-        sut.handle(httpRequest)
-       expect (isValidSpy).toHaveBeenCalledWith('any_email@gmail.com')
-    })
+  
 })
