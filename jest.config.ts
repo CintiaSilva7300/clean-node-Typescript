@@ -4,6 +4,7 @@ export default {
   collectCoverage: false,
   coverageDirectory: "coverage",
   testEnvironment: "node",
+  preset: "@shel/jest-mongodb",
   transform: {
     ".+\\.ts$": "ts-jest",
   },
