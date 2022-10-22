@@ -1,5 +1,5 @@
 module.exports = {
-  mongodbMemoryServeOptions: {
+  mongodbMemoryServerOptions: {
     instance: {
       dbName: "jest",
     },
