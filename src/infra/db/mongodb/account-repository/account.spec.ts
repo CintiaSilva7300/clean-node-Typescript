@@ -9,8 +9,12 @@ describe("Account Mongo Repository", () => {
     await MongoHelper.disconnect();
   });
 
+  const makeSut = (): AccountMongoRepository => {
+    return new AccountMongoRepository();
+  };
+
   test("should return an account on sucess", async () => {
-    const sut = new AccountMongoRepository();
+    const sut = makeSut();
     const account = await sut.add({
       name: "any_name",
       email: "any_email@gmail.com",
@@ -18,9 +22,5 @@ describe("Account Mongo Repository", () => {
     });
 
     expect(account).toBeTruthy();
-    // expect(account.id).toBeTruthy();
-    // expect(account.name).toBe("any_name");
-    // expect(account.email).toBe("any_email@gmail.com");
-    // expect(account.password).toBe("any_password");
   });
 });
