@@ -6,6 +6,7 @@ import {
 
 export class LogControllerDecorator implements Controller {
   private readonly controller: Controller;
+
   constructor(controller: Controller) {
     this.controller = controller;
   }
