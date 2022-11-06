@@ -1,6 +1,6 @@
-import { LogErrorRepository as LogErrorRepository } from "src/data/protocols/log-error-repository";
+import { LogErrorRepository } from "../../data/protocols/log-error-repository";
 import { serverError } from "../../presentation/helpers/http-helper";
-import { HttpResponse, HtppRequest } from "../../presentation/protocolos/http";
+import { HttpResponse, HttpRequest } from "../../presentation/protocolos/http";
 import { Controller } from "src/presentation/protocolos";
 import { LogControllerDecorator } from "./log";
 
@@ -12,7 +12,7 @@ interface SutTypes {
 
 const makeControler = (): Controller => {
   class ControllerStub implements Controller {
-    async handle(httpRequest: HtppRequest): Promise<HttpResponse> {
+    async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
       const httpResponse: HttpResponse = {
         statusCode: 200,
         body: {
