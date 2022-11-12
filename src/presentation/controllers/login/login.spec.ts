@@ -1,5 +1,6 @@
+import { UnauthorizedError } from "./../../errors/unauthorized-error";
 import { Authentication } from "./../../../domain/usecases/authentication";
-import { serverError } from "./../../helpers/http-helper";
+import { serverError, unauthorized } from "./../../helpers/http-helper";
 import { InvalidParamError } from "./../../errors/invalid-param-error";
 import { EmailValidator } from "./../../protocolos/email-validator";
 import { MissingParamError } from "./../../errors/missing-param-error";
@@ -100,5 +101,14 @@ describe("Lgin Controller", () => {
     const authSpy = jest.spyOn(authenticationStub, "auth");
     await sut.handle(makeFakeRequest());
     expect(authSpy).toHaveBeenCalledWith("any_email@mail.com", "any_password");
+  });
+
+  test("should return 401 is invalid credentials are provided", async () => {
+    const { sut, authenticationStub } = makeSut();
+    jest
+      .spyOn(authenticationStub, "auth")
+      .mockReturnValueOnce(new Promise((resolve) => resolve("")));
+    const httpResponse = await sut.handle(makeFakeRequest());
+    expect(httpResponse).toEqual(unauthorized());
   });
 });

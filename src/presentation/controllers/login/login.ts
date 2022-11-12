@@ -2,7 +2,11 @@ import { Authentication } from "./../../../domain/usecases/authentication";
 import { InvalidParamError } from "./../../errors/invalid-param-error";
 import { EmailValidator } from "./../../protocolos/email-validator";
 import { MissingParamError } from "../../errors";
-import { badRequest, serverError } from "./../../helpers/http-helper";
+import {
+  badRequest,
+  serverError,
+  unauthorized,
+} from "./../../helpers/http-helper";
 import { Controller, HttpRequest, HttpResponse } from "../../protocolos";
 
 export class LoginController implements Controller {
@@ -27,6 +31,11 @@ export class LoginController implements Controller {
 
       if (!isValid) {
         return badRequest(new InvalidParamError("email"));
+      }
+
+      const accessToken = await this.authentication.auth(email, password);
+      if (!accessToken) {
+        return unauthorized();
       }
 
       await this.authentication.auth(email, password);
