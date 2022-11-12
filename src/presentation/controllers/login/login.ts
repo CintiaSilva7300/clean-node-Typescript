@@ -7,6 +7,7 @@ import {
 } from "./login-protocols";
 import {
   badRequest,
+  ok,
   serverError,
   unauthorized,
 } from "./../../helpers/http-helper";
@@ -41,9 +42,7 @@ export class LoginController implements Controller {
         return unauthorized();
       }
 
-      await this.authentication.auth(email, password);
-
-      return badRequest(new MissingParamError("email"));
+      return ok({ accessToken });
     } catch (error: any) {
       return serverError(error);
     }
