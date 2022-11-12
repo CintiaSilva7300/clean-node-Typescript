@@ -1,12 +1,11 @@
-import { UnauthorizedError } from "./../../errors/unauthorized-error";
-import { Authentication } from "./../../../domain/usecases/authentication";
-import { serverError, unauthorized } from "./../../helpers/http-helper";
-import { InvalidParamError } from "./../../errors/invalid-param-error";
-import { EmailValidator } from "./../../protocolos/email-validator";
-import { MissingParamError } from "./../../errors/missing-param-error";
-import { HttpRequest, HttpResponse } from "./../../protocolos/http";
 import { LoginController } from "./login";
-import { badRequest } from "../../helpers/http-helper";
+import {
+  serverError,
+  unauthorized,
+  badRequest,
+} from "./../../helpers/http-helper";
+import { MissingParamError, InvalidParamError } from "./../../errors";
+import { EmailValidator, HttpRequest, Authentication } from "./login-protocols";
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
