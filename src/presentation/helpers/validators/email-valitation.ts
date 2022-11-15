@@ -2,7 +2,7 @@ import {
   InvalidParamError,
   MissingParamError,
 } from "../../../presentation/errors";
-import { Validation } from "./validation";
+import { Validation } from "../../protocolos/validation";
 import { EmailValidator } from "../../protocolos/email-validator";
 
 export class EmailValidation implements Validation {

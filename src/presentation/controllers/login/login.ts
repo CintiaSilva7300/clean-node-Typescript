@@ -1,4 +1,4 @@
-import { Validation } from "./../../helpers/validators/validation";
+import { Validation } from "../../protocolos/validation";
 import {
   Controller,
   HttpRequest,

@@ -1,5 +1,5 @@
-import { MissingParamError } from "./../../errors/missing-param-error";
-import { Validation } from "./validation";
+import { MissingParamError } from "../../errors/missing-param-error";
+import { Validation } from "../../protocolos/validation";
 import { ValidationComposite } from "./validation-composite";
 
 const makeValidation = (): Validation => {
@@ -42,7 +42,7 @@ describe("Validation Composite", () => {
       .mockReturnValueOnce(new MissingParamError("field"));
 
     const error = sut.validate({ field: "any_value" });
-    expect(error).toEqual(new MissingParamError("field"));
+    expect(error).toEqual(new Error());
   });
 
   test("should not return if validation succeeds", () => {
