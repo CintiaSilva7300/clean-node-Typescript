@@ -1,5 +1,5 @@
 import { AccountModel } from "./../../domain/models/account";
-import { LogErrorRepository } from "../../data/protocols/log-error-repository";
+import { LogErrorRepository } from "../../data/protocols/db/log-error-repository";
 import { serverError, ok } from "../../presentation/helpers/http/http-helper";
 import { HttpResponse, HttpRequest } from "../../presentation/protocolos/http";
 import { Controller } from "src/presentation/protocolos";
