@@ -1,4 +1,4 @@
-import { HashComparer } from "./../../data/protocols/criptografy/hash-comparer";
+import { HashComparer } from "../../../data/protocols/criptografy/hash-comparer";
 import bcrypt from "bcrypt";
 import { Hasher } from "src/data/protocols/criptografy/hasher";
 
