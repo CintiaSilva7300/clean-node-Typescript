@@ -5,7 +5,7 @@ import {
   EmailValidator,
   AddAccount,
   Validation,
-} from "./singup-protocols";
+} from "./singup-controller-protocols";
 import { badRequest, serverError, ok } from "../../helpers/http/http-helper";
 export class SignUpController implements Controller {
   private readonly addAccount: AddAccount;

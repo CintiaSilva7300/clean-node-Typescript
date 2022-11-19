@@ -1,5 +1,5 @@
-import { HttpRequest } from "./../../protocolos/http";
-import { SignUpController } from "./signup";
+import { HttpRequest } from "../../protocolos/http";
+import { SignUpController } from "./signup-controller";
 import {
   ServerError,
   InvalidParamError,
@@ -11,7 +11,7 @@ import {
   AddAccount,
   addAccountModel,
   Validation,
-} from "./singup-protocols";
+} from "./singup-controller-protocols";
 import { ok, serverError, badRequest } from "../../helpers/http/http-helper";
 
 const makeAddAccount = (): AddAccount => {
